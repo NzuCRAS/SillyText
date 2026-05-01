@@ -1,0 +1,44 @@
+/* Pretext Render Optimizer — runtime styles
+ * These rules are loaded by SillyTavern via manifest.json's "css" field.
+ * The settings panel keeps its own selectors scoped under
+ * `.pretext-render-settings` to avoid leaking into the rest of the UI.
+ */
+
+.pretext-render-settings .pretext-hint {
+  font-size: 0.85em;
+  opacity: 0.75;
+  margin: 4px 0 10px;
+}
+
+.pretext-render-settings .pretext-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.pretext-render-settings .pretext-row > span {
+  flex: 1;
+  font-size: 0.9em;
+}
+
+.pretext-render-settings .pretext-row > input[type="number"] {
+  width: 96px;
+}
+
+.pretext-render-settings hr {
+  margin: 10px 0;
+  opacity: 0.3;
+}
+
+/* Virtual scroll placeholder: same height as the message it replaces.
+ * No background — we don't want it to look like a different element when
+ * scrolling fast. */
+.pretext-placeholder {
+  width: 100%;
+  pointer-events: none;
+}
+
+/* Folded message hint styling lives in modules/typography.js to keep
+ * fold-specific rules co-located with the JS that toggles them. The button
+ * inherits color from its surrounding chat bubble. */

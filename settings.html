@@ -1,0 +1,67 @@
+<div class="pretext-render-settings">
+  <div class="inline-drawer">
+    <div class="inline-drawer-toggle inline-drawer-header">
+      <b>Pretext Render Optimizer</b>
+      <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
+    </div>
+    <div class="inline-drawer-content">
+      <p class="pretext-hint">
+        基于 <a href="https://github.com/chenglou/pretext" target="_blank" rel="noopener">@chenglou/pretext</a>
+        的前端显示优化套件：长聊天虚拟滚动、流式抗抖动、多语言排版优化。
+      </p>
+
+      <label class="checkbox_label">
+        <input type="checkbox" id="pretext_enabled" />
+        <span>启用插件</span>
+      </label>
+
+      <hr />
+
+      <h4>虚拟滚动</h4>
+      <label class="checkbox_label">
+        <input type="checkbox" id="pretext_vs_enabled" />
+        <span>启用虚拟滚动（视口外消息以占位符代替）</span>
+      </label>
+      <label class="pretext-row">
+        <span>消息阈值（≥ 多少条才启用）</span>
+        <input type="number" id="pretext_vs_threshold" min="20" max="5000" step="10" class="text_pole" />
+      </label>
+      <label class="pretext-row">
+        <span>视口缓冲（px，越大越平滑越费内存）</span>
+        <input type="number" id="pretext_vs_overscan" min="0" max="4000" step="100" class="text_pole" />
+      </label>
+
+      <hr />
+
+      <h4>流式抗抖动</h4>
+      <label class="checkbox_label">
+        <input type="checkbox" id="pretext_ss_enabled" />
+        <span>流式输出时预测高度，避免气泡跳动</span>
+      </label>
+
+      <hr />
+
+      <h4>排版优化</h4>
+      <label class="checkbox_label">
+        <input type="checkbox" id="pretext_ty_enabled" />
+        <span>启用排版优化（更整洁的中英混排换行 + 长消息折叠）</span>
+      </label>
+      <label class="pretext-row">
+        <span>折叠阈值（行数）</span>
+        <input type="number" id="pretext_ty_fold" min="5" max="200" step="1" class="text_pole" />
+      </label>
+
+      <hr />
+
+      <h4>调试</h4>
+      <label class="checkbox_label">
+        <input type="checkbox" id="pretext_debug_log" />
+        <span>在控制台打印调试日志</span>
+      </label>
+      <label class="checkbox_label">
+        <input type="checkbox" id="pretext_debug_overlay" />
+        <span>在每条消息右上显示测量值（开发用）</span>
+      </label>
+    </div>
+  </div>
+</div>

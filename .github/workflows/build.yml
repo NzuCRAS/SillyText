@@ -1,0 +1,66 @@
+# Auto-build dist/ on push.
+#
+# Why this workflow exists
+# ------------------------
+# SillyTavern installs extensions by `git clone`-ing the repo as-is. It does
+# NOT run `npm install` or `npm run build`. That means the compiled bundle
+# (dist/index.js) MUST live in the repo for the extension to work.
+#
+# Forgetting to `npm run build` before pushing is the #1 source of broken
+# updates. This workflow makes that impossible: every push that touches the
+# source automatically rebuilds dist/index.js and commits it back.
+#
+# Loop prevention
+# ---------------
+# - The `paths:` filter only fires on source-side changes; the auto-commit
+#   touches only dist/, so the workflow does NOT re-trigger itself.
+# - The auto-commit message also carries `[skip ci]` as a belt-and-braces
+#   guard against accidental future broadening of the path filter.
+
+name: Build dist
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'settings.html'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vite.config.js'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Commit dist if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- dist/index.js; then
+            echo "No dist changes — nothing to commit."
+          else
+            git add dist/index.js
+            git commit -m "chore(build): rebuild dist [skip ci]"
+            git push
+          fi

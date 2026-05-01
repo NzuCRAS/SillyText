@@ -1,0 +1,19 @@
+{
+  "display_name": "Pretext Render Optimizer",
+  "loading_order": 100,
+  "requires": [],
+  "optional": [],
+  "dependencies": [],
+  "js": "dist/index.js",
+  "css": "style.css",
+  "author": "SillyText",
+  "version": "0.1.0",
+  "homePage": "https://github.com/chenglou/pretext",
+  "auto_update": true,
+  "minimum_client_version": "1.12.0",
+  "hooks": {
+    "activate": "onActivate",
+    "disable": "onDisable",
+    "delete": "onDelete"
+  }
+}

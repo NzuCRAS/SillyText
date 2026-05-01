@@ -1,0 +1,12 @@
+node_modules/
+
+# SillyTavern installs extensions by `git clone` — it does NOT run `npm install`
+# or `npm run build`. The compiled bundle MUST be committed so the extension
+# works after install. We only ignore the source map (272 KB, dev-only).
+dist/*.map
+
+*.log
+.DS_Store
+.vscode/
+.idea/
+.claude/
